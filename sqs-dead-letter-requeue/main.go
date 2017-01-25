@@ -1,4 +1,4 @@
-package main // import "github.com/Jimdo/sqs-dead-letter-requeue"
+package main
 
 import (
 	"log"
@@ -11,7 +11,7 @@ import (
 
 var (
 	app       = kingpin.New("dead-letter-requeue", "Requeues messages from a SQS dead-letter queue to the active one.")
-	queueName = app.Arg("queue-name", "Name of the SQS queue (e.g. prod-mgmt-website-data-www100-jimdo-com).").Required().String()
+	queueName = app.Arg("queue-name", "Name of the SQS queue (e.g. production-backdock-investor-created).").Required().String()
 )
 
 func main() {
@@ -19,7 +19,7 @@ func main() {
 
 	activeQueueName := *queueName
 
-	var deadLetterQueueName = activeQueueName + "_dead_letter"
+	var deadLetterQueueName = activeQueueName + "-dlq"
 
 	auth, err := aws.EnvAuth()
 	if err != nil {
