@@ -1,4 +1,4 @@
-package main
+package main // import "github.com/raisebook/sqs-dead-letter-requeue"
 
 import (
 	"log"
@@ -27,7 +27,7 @@ func main() {
 		return
 	}
 
-	conn := sqs.New(auth, aws.EUWest)
+	conn := sqs.New(auth, aws.APSoutheast2)
 
 	deadLetterQueue, err := conn.GetQueue(deadLetterQueueName)
 	if err != nil {
