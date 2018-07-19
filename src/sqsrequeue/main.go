@@ -1,4 +1,4 @@
-package main // import "github.com/raisebook/sqs-dead-letter-requeue"
+package main
 
 import (
 	"log"

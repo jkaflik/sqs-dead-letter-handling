@@ -1,1 +1,4 @@
-sqs-dead-letter-requeue/sqs-dead-letter-requeue
+src/sqsrequeue/sqsrequeue
+src/sqsrequeue/vendor
+pkg
+bin

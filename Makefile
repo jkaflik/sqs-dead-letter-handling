@@ -1,10 +1,9 @@
-all: build tag push
+image = 038451313208.dkr.ecr.ap-southeast-2.amazonaws.com/sqs-dead-letter-requeue:latest
+
+all: build push
 
 build:
-	docker run --rm -v "$(CURDIR)/sqs-dead-letter-requeue:/src" -v /var/run/docker.sock:/var/run/docker.sock centurylink/golang-builder raisebook/sqs-dead-letter-requeue
-
-tag:
-	docker tag raisebook/sqs-dead-letter-requeue raisebook/sqs-dead-letter-requeue
+	docker build -t $(image) .
 
 push:
-	docker push raisebook/sqs-dead-letter-requeue
+	docker push $(image)
