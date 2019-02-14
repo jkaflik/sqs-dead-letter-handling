@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"gopkg.in/alecthomas/kingpin.v1"
@@ -47,7 +48,7 @@ func main() {
 		return
 	}
 
-	conn := sqs.New(auth, aws.NewConfig().WithRegion(os.Getenv("AWS_DEFAULT_REGION")))
+	conn := sqs.New(sess, aws.NewConfig().WithRegion(os.Getenv("AWS_DEFAULT_REGION")))
 
 	sourceQueueURL, err := conn.GetQueueUrl(getQueueUrlnput(&sourceQueueName, accountID))
 	if err != nil {
@@ -93,6 +94,7 @@ func main() {
 
 			sendMessageBatchRequestEntries = append(sendMessageBatchRequestEntries, &sqs.SendMessageBatchRequestEntry{
 				Id:          &i,
+				MessageAttributes: element.MessageAttributes,
 				MessageBody: element.Body})
 		}
 
