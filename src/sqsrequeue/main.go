@@ -69,10 +69,11 @@ func main() {
 		visibilityTimeout := int64(20)
 
 		resp, err := conn.ReceiveMessage(&sqs.ReceiveMessageInput{
-			WaitTimeSeconds:     &waitTimeSeconds,
-			MaxNumberOfMessages: &maxNumberOfMessages,
-			VisibilityTimeout:   &visibilityTimeout,
-			QueueUrl:            sourceQueueURL.QueueUrl})
+			WaitTimeSeconds:       &waitTimeSeconds,
+			MaxNumberOfMessages:   &maxNumberOfMessages,
+			VisibilityTimeout:     &visibilityTimeout,
+			MessageAttributeNames: aws.StringSlice([]string{"All"}),
+			QueueUrl:              sourceQueueURL.QueueUrl})
 
 		if err != nil {
 			log.Fatal(err)
@@ -93,9 +94,9 @@ func main() {
 			i := strconv.Itoa(index)
 
 			sendMessageBatchRequestEntries = append(sendMessageBatchRequestEntries, &sqs.SendMessageBatchRequestEntry{
-				Id:          &i,
+				Id:                &i,
 				MessageAttributes: element.MessageAttributes,
-				MessageBody: element.Body})
+				MessageBody:       element.Body})
 		}
 
 		_, err = conn.SendMessageBatch(&sqs.SendMessageBatchInput{
