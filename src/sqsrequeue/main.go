@@ -47,7 +47,7 @@ func main() {
 		return
 	}
 
-	conn := sqs.New(auth, aws.APSoutheast2)
+	conn := sqs.New(auth, aws.NewConfig().WithRegion(os.Getenv("AWS_DEFAULT_REGION")))
 
 	sourceQueueURL, err := conn.GetQueueUrl(getQueueUrlnput(&sourceQueueName, accountID))
 	if err != nil {
