@@ -1,5 +1,4 @@
 src/sqsrequeue/sqsrequeue
-src/sqsrequeue/vendor
 pkg
 bin
 .idea

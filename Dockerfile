@@ -4,7 +4,7 @@ ENV APP_NAME sqsrequeue
 
 RUN mkdir -p /app/src/$APP_NAME /app/bin /app/pkg /root/.ssh
 
-COPY src/$APP_NAME /app/src/$APP_NAME/
+COPY cmd /app/src/$APP_NAME/
 
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH:/app/bin/
 ENV GOPATH $GOPATH:/app/
